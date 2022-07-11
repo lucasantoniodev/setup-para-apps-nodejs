@@ -72,4 +72,20 @@ Quando compilamos o código TS para JS, por padrão ele é gerado na mesma pasta
 
     <!-- Permite importação de arquivos Json dentro do código -->
     "resolveJsonModule": true,
+
+   <!-- Configurando caminhos para facilitar na importação de arquivos do próprio ambiente de desenvolvimento -->
+    "baseUrl": ".",
+    "paths": {
+      <!-- @nome/* : ["directorio/*"] -->
+      <!-- {
+         @nome = nome para importação,
+         /* = tudo que vier depois,
+         ["caminho"/*]
+      } -->
+      "@models/*" : ["./src/models/*"],
+      "@views/*" : ["./src/views/*"],
+      "@controllers/*" : ["./src/controllers/*"],
+      "@configs/*" : ["./src/configs/*"],
+    }
 }
+ 
