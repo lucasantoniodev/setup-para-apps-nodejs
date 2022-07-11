@@ -35,7 +35,7 @@ Poderiamos usar simplesmente o comando "yarn tsc", porém não é a melhor manei
 
    1.2 - npx gitignore node - #(Criar através do npx, que gera um gitignore com possíveis arquivos que podem ser ignorados);
 
-# <-- Algumas configurações no tsconfig -->
+# <-- Algumas configurações adicionais no tsconfig -->
 
 Quando compilamos o código TS para JS, por padrão ele é gerado na mesma pasta, então podemos definir a configuração para uma nova pasta chamada "dist"
 
