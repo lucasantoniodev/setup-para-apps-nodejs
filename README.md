@@ -23,7 +23,7 @@ Poderiamos usar simplesmente o comando "yarn tsc", porém não é a melhor manei
 
    1.1.1 - "dev": "ts-node-dev src/server.ts"
    1.1.2 - "dev": "ts-node-dev --respawn src/server.ts" #(Flag para não deixar nenhum processo vivo)
-   1.1.3 - "dev": "ts-node-dev --respawn --transpileOnly src/server.ts" #(Flag para ignorar erros na tipagem do código, ele simplesmente execute, pois demora mais para executar, isso deixamos que o Eslint cuide!)
+   1.1.3 - "dev": "ts-node-dev --respawn --transpile-only src/server.ts" #(Flag para ignorar erros na tipagem do código, ele simplesmente execute, pois demora mais para executar, isso deixamos que o Eslint cuide!)
    1.1.4 - "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules src/server.ts" #(Flag para ignorar as mudanças que ocorrem no node_modules, dando uma rapidez na execução)
    1.1.5 - "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules --no-notify src/server.ts" #(Flag para remover a notificação, opcional utilizá-la)
 
@@ -88,4 +88,11 @@ Quando compilamos o código TS para JS, por padrão ele é gerado na mesma pasta
       "@configs/*" : ["./src/configs/*"],
     }
 }
- 
+
+2. Caso utilize o atalho de paths no seu projeto, é necessário adicionar uma outra dependência para que o ts-node-dev reconheça esses novos atalhos de directórios 
+   
+   2.1 Dependência de configurações de paths
+      - yarn add -D tsconfig-paths
+      
+   2.2 Adicionar novas configurações no script de execução "dev" no arquivo package.json
+      -  "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules  --no-notify src/server.ts"
