@@ -1,3 +1,9 @@
+# NodeJS & Typescript
+
+Configurações iniciais para projetos de backend utilizando nodeJS.
+
+Referência da Rocketseat: https://www.youtube.com/watch?v=rCeGfFk-uCk
+
 # <-- PADRÃO -->
 
 1. yarn init -y #(Parâmetro -y faz com que aceite todas as configurações)
@@ -93,6 +99,19 @@ Quando compilamos o código TS para JS, por padrão ele é gerado na mesma pasta
    
    2.1 Dependência de configurações de paths
       - yarn add -D tsconfig-paths
-      
+
    2.2 Adicionar novas configurações no script de execução "dev" no arquivo package.json
       -  "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules  --no-notify src/server.ts"
+
+   
+# <- Configurando o ESLINT para definir um padrão de código na aplicação e para todos que utilizarem o projeto adotarem esse padrão ->
+
+1. Adicionando dependência
+   - yarn add -D eslint
+
+2. Criando arquivo de configuração do eslint
+   - yarn eslint --init (https://prnt.sc/liqlaXE-6ZCm)
+   - Referência de configurações do eslint Diego-Rocketseat: https://github.com/diego3g/node-microservices-ddd/blob/master/packages/server/.eslintrc.json
+
+3. Instalando as dependências pendentes do eslint
+   - yarn add -D @typescript-eslint/eslint-plugin@latest eslint-config-airbnb-base@latest eslint-plugin-import@^2.25.2 @typescript-eslint/parser@latest
