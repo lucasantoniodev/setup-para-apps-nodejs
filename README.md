@@ -1,23 +1,24 @@
-# NodeJS & Typescript
+<h1> NodeJS & Typescript </h1>
 
 Configurações iniciais para projetos de backend utilizando nodeJS.
 
 Referência da Rocketseat: https://www.youtube.com/watch?v=rCeGfFk-uCk
 
-# <-- PADRÃO -->
+<h2>PADRÃO</h2> 
 
 1. yarn init -y #(Parâmetro -y faz com que aceite todas as configurações)
 2. yarn add -D typescript #(Instalando o typescript em modo de desenvolvimento)
 3. yarn tsc --init #(Criando as configurações do typescript)
 
-# <-- Lib Express -->
+<h2>Lib Express</h2> 
+   <ol>
+      <li>yarn add express</li>
+      <li>yarn add -D @types/express #(A lib express não traz por padrão os types, então precisa adicionar nas DevDeP.)</li>
+   </ol>
 
-1. yarn add express
-2. yarn add -D @types/express #(A lib express não traz por padrão os types, então precisa adicionar nas DevDeP.)
+<h2>Convertendo código TS para JS (Para produção)</h2> 
 
-# <-- Convertendo código TS para JS (Para produção) -->
-
-Poderiamos usar simplesmente o comando "yarn tsc", porém não é a melhor maneira. Então em desenvolvimento usamos ferramentas para automatizar a execução do código Typescript, sem precisar ficar executando uma versão do código Javascript toda vez.
+<p style="font-size: 10pt;">Poderiamos usar simplesmente o comando "yarn tsc", porém não é a melhor maneira. Então em desenvolvimento usamos ferramentas para automatizar a execução do código Typescript, sem precisar ficar executando uma versão do código Javascript toda vez.</p>
 
 1. yarn -D ts-node-dev #(Essa é uma ferramente que une 3 em 1, tsc(converte o código ts -> js) + node(executa o código) + nodemon(Observa mudanças))
 
