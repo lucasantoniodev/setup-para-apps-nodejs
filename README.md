@@ -33,7 +33,7 @@ Poderiamos usar simplesmente o comando "yarn tsc", porém não é a melhor manei
    1.1.4 - "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules src/server.ts" #(Flag para ignorar as mudanças que ocorrem no node_modules, dando uma rapidez na execução)
    1.1.5 - "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules --notify false src/server.ts" #(Flag para remover a notificação, opcional utilizá-la)
 
-# <-- Commitando -->
+# <-- .gitignore -->
 
 1. Criar o .gitignore #(Ignorar o upload de arquivos "desnecessários" ou "confidenciais")
 
@@ -163,7 +163,7 @@ Quando compilamos o código TS para JS, por padrão ele é gerado na mesma pasta
    - preset: 'ts-jest',
    - testEnvironment: 'node'
 
-## Por enquanto apresentou erros, então ignorei essa opção e passei a importar os arquivos de maneira padrão (../../models)
+Por enquanto apresentou erros, então ignorei essa opção e passei a importar os arquivos de maneira padrão (../../models)
 
 5. Caso estejamos utilizando o atalho de importação de arquivos precisaremos configurar o jest.config.ts também.
    <!-- Importando o compilerOptions do arquivo tsconfig -->
@@ -176,3 +176,25 @@ Quando compilamos o código TS para JS, por padrão ele é gerado na mesma pasta
      "include": [
      "src/**/*"
      ]
+
+# <-- Adicionando o BABEL para facilitar a execução do código javascript depois do build -->
+
+Poderiamos utilizar uma ferramenta chamada tsc paths para fazer o replace e transformar todas as importações, porém podemos usar o babel que tem todas as funcionalidades integradas
+
+1. Instalando a dependências do babel
+   - yarn add -D @babel/cli @babel/core @babel/node @babel/preset-env @babel/preset-typescript babel-plugin-module-resolver
+
+2. Criar o arquivo de configuração babel.config.js na raíz
+   - Configuração utilizada neste projeto: https://prnt.sc/fyw3I-gouv9C 
+
+3. Criar o script que vai gerar a build no package.json
+   - "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored"
+
+4. Criando o .eslintignore para o eslint não ficar tentando corrigir os códigos javascript
+   - dist
+   - /*.js
+
+5. Criando script para executar a aplicação em produção
+   - "start": "node dist/server.js"
+
+5. Projeto pronto para Build
