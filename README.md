@@ -45,77 +45,86 @@ Poderiamos usar simplesmente o comando "yarn tsc", porém não é a melhor manei
 
 Quando compilamos o código TS para JS, por padrão ele é gerado na mesma pasta, então podemos definir a configuração para uma nova pasta chamada "dist"
 
-1. {
-      "compilerOptions" : {
-      <!-- Neste caso o arquivo principal está na src -->
-      "rootDir": "./src", // Está configuração depende de adicionar outra camada chamada "include", depois do "compilerOptions"
+1.  {
+    "compilerOptions" : {
 
-         <!-- Diretório onde o arquivo .js vai ficar depois do build -->
+       <!-- Neste caso o arquivo principal está na src -->
 
-      "outDir": "./dirt",
+    "rootDir": "./src", - Está configuração depende de adicionar outra camada chamada "include", depois do "compilerOptions"
 
-         <!-- Permite que arquivos .js possam ser importados no typescript -->
+       <!-- Diretório onde o arquivo .js vai ficar depois do build -->
 
-      "allowJs" : true,
+    "outDir": "./dirt",
 
-         <!-- Lib -->
+       <!-- Permite que arquivos .js possam ser importados no typescript -->
 
-      "lib" : ["es6"],
+    "allowJs" : true,
 
-         <!-- Permite sobrescrever tipagens prontas-->
+       <!-- Lib -->
 
-      "typeRoots": [
-      <!-- Procurar os typesRoots nessas pastas -->
-      "./node_modules/@types",
-      <!-- Estrutura criada manualmente, na qual podemos sobrescrever as tipagens -->
-      "./src/@types"
-      ]
+    "lib" : ["es6"],
 
-         <!-- Remove todos os comentários no processo de build  -->
+       <!-- Permite sobrescrever tipagens prontas-->
 
-      "removeComments": true,
+    "typeRoots": [
 
-         <!-- "Por alto"!!, obriga um função a retorna o arquivo tipado. Quando desabilitado podemos retornar valores nulos. -->
+       <!-- Procurar os typesRoots nessas pastas -->
 
-      "strict" : true,
+    "./node_modules/@types",
 
-         <!-- Emitir no processo de build os metadas dos decorators para fazer isso funcionar em produção (Muito usado com TypeORM, sequelize...)-->
+       <!-- Estrutura criada manualmente, na qual podemos sobrescrever as tipagens -->
 
-         "experimentalDecoratos" : true,
-         "emitDecoratorMetadata" : true,
+    "./src/@types"
+    ]
 
-         <!-- Permite importação de arquivos Json dentro do código -->
-         "resolveJsonModule": true,
+       <!-- Remove todos os comentários no processo de build  -->
 
-         <!-- Configurando caminhos para facilitar na importação de arquivos do próprio ambiente de desenvolvimento -->
+    "removeComments": true,
 
-         "baseUrl": ".", // Caminho base no qual vai procurar os arquivos
-         "paths": {
-            <!-- @nome/* : ["directorio/*"] -->
-            <!-- {
-               @nome = nome para importação,
-               /* = tudo que vier depois,
-               ["caminho"/*]
-            } -->
-            "@models/*" : ["./src/models/*"],
-            "@views/*" : ["./src/views/*"],
-            "@controllers/*" : ["./src/controllers/*"],
-            "@configs/*" : ["./src/configs/*"],
-         }
-      },
-      "include": [
-         "src/**/*"
-      ]
-   }
+       <!-- "Por alto"!!, obriga um função a retorna o arquivo tipado. Quando desabilitado podemos retornar valores nulos. -->
 
+    "strict" : true,
 
-2.  Caso utilize o atalho de paths no seu projeto, é necessário adicionar uma outra dependência para que o ts-node-dev reconheça esses novos atalhos de directórios
+       <!-- Emitir no processo de build os metadas dos decorators para fazer isso funcionar em produção (Muito usado com TypeORM, sequelize...)-->
+
+          "experimentalDecoratos" : true,
+          "emitDecoratorMetadata" : true,
+
+       <!-- Permite importação de arquivos Json dentro do código -->
+
+          "resolveJsonModule": true,
+
+       <!-- Configurando caminhos para facilitar na importação de arquivos do próprio ambiente de desenvolvimento -->
+
+          "baseUrl": ".", // Caminho base no qual vai procurar os arquivos
+          "paths": {
+
+       <!-- @nome/* : ["directorio/*"] -->
+       <!-- {
+                @nome = nome para importação,
+                /* = tudo que vier depois,
+                ["caminho"/*]
+             } -->
+
+             "@models/*" : ["./src/models/*"],
+             "@views/*" : ["./src/views/*"],
+             "@controllers/*" : ["./src/controllers/*"],
+             "@configs/*" : ["./src/configs/*"],
+          }
+
+    },
+    "include": [
+    "src/**/*"
+    ]
+    }
+
+2)  Caso utilize o atalho de paths no seu projeto, é necessário adicionar uma outra dependência para que o ts-node-dev reconheça esses novos atalhos de directórios
 
     2.1 Dependência de configurações de paths
 
     - yarn add -D tsconfig-paths
 
-    2.2 Adicionar novas configurações no script de execução "dev" no arquivo package.json
+      2.2 Adicionar novas configurações no script de execução "dev" no arquivo package.json
 
     - "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts"
 
@@ -136,30 +145,34 @@ Quando compilamos o código TS para JS, por padrão ele é gerado na mesma pasta
 # <-- Configurando o Jest para realizar testes -->
 
 1. Adicionando dependência
+
    - yarn add -D jest
    - yarn add -D @types/jest
    - yarn add -D ts-jest
 
 2. Criando arquivo de configuração do jest
+
    - yarn jest --init (https://prnt.sc/0C8av6s8pgEv)
 
 3. Habilitando o jest no eslint
+
    - "env": {"jest": true}
 
-4. Configurações principais do arquivo jest.config.ts 
+4. Configurações principais do arquivo jest.config.ts
    - clearMocks: true,
    - preset: 'ts-jest',
    - testEnvironment: 'node'
 
 ## Por enquanto apresentou erros, então ignorei essa opção e passei a importar os arquivos de maneira padrão (../../models)
+
 5. Caso estejamos utilizando o atalho de importação de arquivos precisaremos configurar o jest.config.ts também.
    <!-- Importando o compilerOptions do arquivo tsconfig -->
    - import { compilerOptions } from './tsconfig.json'
-   <!-- Importe do plugin para mapear os directorios -->
+     <!-- Importe do plugin para mapear os directorios -->
    - import { pathsToModuleNameMapper } from 'ts-jest'
-   <!-- Adicionando configuração ao jest.config.ts -->
-   -   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>' }),
-   <!-- Necessário adicionar o include no arquivo tsconfig.json -->
-      "include": [
-         "src/**/*"
-      ]
+     <!-- Adicionando configuração ao jest.config.ts -->
+   - moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>' }),
+     <!-- Necessário adicionar o include no arquivo tsconfig.json -->
+     "include": [
+     "src/**/*"
+     ]
