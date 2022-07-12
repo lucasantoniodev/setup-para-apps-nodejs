@@ -22,10 +22,26 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@models/*" : ["./src/models/*"],
-      "@views/*" : ["./src/views/*"],
-      "@controllers/*" : ["./src/controllers/*"],
-      "@configs/*" : ["./src/configs/*"],
+      "@models/*": [
+        "./src/models/*"
+      ],
+      "@views/*": [
+        "./src/views/*"
+      ],
+      "@controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@configs/*": [
+        "./src/configs/*"
+      ],
     }
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+  
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
 }
